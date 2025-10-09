@@ -1,0 +1,47 @@
+services:
+  mongodb-atlas:
+    image: mongodb/mongodb-atlas-local 
+    restart: unless-stopped
+    container_name: mongodb-atlas
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGODB_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    volumes:
+      - /home/ai/mongo-atlas/data:/data/db 
+      - /home/ai/mongo-atlas/config:/data/configdb    
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    restart: unless-stopped
+    container_name: n8n
+    depends_on:
+      - mongodb-atlas
+      - pproxy
+    environment:
+      # - N8N_HOST=${SUBDOMAIN}.${DOMAIN_NAME}
+      - N8N_PORT=${N8N_PORT}
+      - N8N_PROTOCOL=${N8N_PROTOCOL}
+      - NODE_ENV=production
+      - LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
+      - LANGCHAIN_TRACING_V2=true
+      - LANGCHAIN_API_KEY="${LANGCHAIN_API_KEY}"
+      - GENERIC_TIMEZONE="${GENERIC_TIMEZONE}"
+    volumes:
+      - /home/ai/n8n/data:/home/node/.n8n:rw
+      - /home/ai/n8n/files:/files
+### Proxy ###
+  pproxy:
+    image: mosajjal/pproxy
+    container_name: pproxy
+    restart: unless-stopped
+    command: -l http://:80 -vv -r socks5://${PROXY_HOST}:${PROXY_PORT}?rules#${PROXY_USER}:${PROXY_PASSWORD}
+    tty: true
+    # healthcheck:
+    #     test: netstat -an | grep -q 8[0]
+    #     interval: 1m30s
+    #     timeout: 10s
+    #     retries: 3
+    #     start_period: 10s
+    #     start_interval: 5s
+    volumes:
+      - /home/pproxy/proxy_rules:/rules
+  
