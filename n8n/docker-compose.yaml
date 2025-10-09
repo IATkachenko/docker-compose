@@ -39,7 +39,7 @@ services:
       - /home/ai/n8n/files:/files
     networks:
       - n8n_net
-      - nginx-prox
+      - nginx-proxy
 ### Proxy ###
   pproxy:
     image: mosajjal/pproxy
