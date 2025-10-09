@@ -9,6 +9,7 @@ services:
     image: mongodb/mongodb-atlas-local 
     restart: unless-stopped
     container_name: mongodb-atlas
+    user: root
     environment:
       MONGODB_INITDB_ROOT_USERNAME: ${MONGO_USER}
       MONGODB_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
