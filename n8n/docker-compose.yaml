@@ -19,7 +19,7 @@ services:
     networks:
       - n8n_net
   n8n:
-    image: docker.n8n.io/n8nio/n8n
+    image: rxchi1d/n8n-ffmpeg
     restart: unless-stopped
     container_name: n8n
     depends_on:
