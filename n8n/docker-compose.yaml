@@ -61,4 +61,11 @@ services:
       - /home/pproxy/proxy_rules:/rules
     networks:
       - n8n_net
+
+  subtitle_api:
+    image: silvar/subtitle_api:latest
+    container_name: subtitle_api
+    restart: unless-stopped
+    networks:
+      - n8n_net
   
