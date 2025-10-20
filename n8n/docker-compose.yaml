@@ -37,6 +37,8 @@ services:
       - LANGCHAIN_TRACING_V2=true
       - LANGCHAIN_API_KEY="${LANGCHAIN_API_KEY}"
       - GENERIC_TIMEZONE="${GENERIC_TIMEZONE}"
+      - WEBHOOK_URL="${WEBHOOK_URL}"
+      - N8N_EDITOR_BASE_URL="${N8N_EDITOR_BASE_URL}"
     volumes:
       - /home/ai/n8n/data:/home/node/.n8n:rw
       - /home/ai/n8n/files:/files
