@@ -16,7 +16,7 @@ services:
     volumes:
       - /home/ai/mongo-atlas/data:/data/db 
       - /home/ai/mongo-atlas/config:/data/configdb    
-    port:
+    ports:
      - 27017:27017
     networks:
       - n8n_net
