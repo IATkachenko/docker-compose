@@ -15,7 +15,8 @@ services:
       MONGODB_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     volumes:
       - /home/ai/mongo-atlas/data:/data/db 
-      - /home/ai/mongo-atlas/config:/data/configdb    
+      - /home/ai/mongo-atlas/config:/data/configdb
+      - /home/ai/mongo-atlas/mongot:/data/mongot
     ports:
      - 27017:27017
     networks:
