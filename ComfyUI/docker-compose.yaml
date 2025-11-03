@@ -1,0 +1,43 @@
+networks:
+  comfy_net:
+    driver: bridge
+  nginx-proxy:
+    external: true
+
+services:
+  comfy_ui:
+    image: silvar/comfy_ui:latest
+    container_name: comfy_ui
+    restart: unless-stopped
+    user: root
+    volumes:
+      - /mnt:/data
+    networks:
+      - comfy_net
+    ports:
+      - 7860:7860
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+  wan_api:
+    image: silvar/wan_api:latest
+    container_name: wan_api
+    restart: unless-stopped
+    environment:
+      - COMFY_HOST="comfy_ui"
+      - COMFY_PORT="7860"
+      - OUTPUT_DIR="/output"
+    volumes:
+      - /mnt/outptut:/output
+    depends_on:
+      - comfy_ui
+    ports:
+      - 80:80      
+    networks:
+      - comfy_net
+  
+  
