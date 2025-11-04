@@ -1,12 +1,10 @@
 networks:
   comfy_net:
     driver: bridge
-  nginx-proxy:
-    external: true
 
 services:
   comfy_ui:
-    image: silvar/comfy_ui:latest
+    image: silvar/comfy:latest
     container_name: comfy_ui
     restart: unless-stopped
     user: root
