@@ -26,16 +26,14 @@ services:
     container_name: wan_api
     restart: unless-stopped
     environment:
-      - COMFY_HOST="comfy_ui"
-      - COMFY_PORT="7860"
-      - OUTPUT_DIR="/output"
+      - COMFY_HOST=comfy_ui
+      - COMFY_PORT=7860
+      - OUTPUT_DIR=/output
     volumes:
-      - /mnt/outptut:/output
+      - /mnt/output:/output
     depends_on:
       - comfy_ui
     ports:
-      - 80:80      
+      - 80:80
     networks:
       - comfy_net
-  
-  
