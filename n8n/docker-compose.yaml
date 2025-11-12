@@ -49,6 +49,8 @@ services:
     networks:
       - n8n_net
       - nginx-proxy  
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 ### Proxy ###
   pproxy:
     image: mosajjal/pproxy
@@ -74,10 +76,10 @@ services:
     restart: unless-stopped
     networks:
       - n8n_net
-  stress_api:
-    image: silvar/stress_api:latest
-    container_name: stress_api
-    restart: unless-stopped
-    networks:
-      - n8n_net
+  # stress_api:
+  #   image: silvar/stress_api:latest
+  #   container_name: stress_api
+  #   restart: unless-stopped
+  #   networks:
+  #     - n8n_net
   
