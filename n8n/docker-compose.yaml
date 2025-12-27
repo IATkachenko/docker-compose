@@ -49,7 +49,7 @@ services:
       - EXECUTIONS_DATA_MAX_AGE=72
       - N8N_PROXY_HOPS=1
       - NODES_EXCLUDE=[]
-      - N8N_RESTRICT_FILE_ACCESS_TO="/files;/home/node/.n8n"
+      - N8N_RESTRICT_FILE_ACCESS_TO="/files"
     volumes:
       - /home/ai/n8n/data:/home/node/.n8n:rw
       - /home/ai/n8n/files:/files
