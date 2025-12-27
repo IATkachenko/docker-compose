@@ -1,16 +1,6 @@
-FROM n8nio/n8n:latest
+FROM rxchi1d/n8n-ffmpeg:latest
 
 USER root
-RUN ARCH=$(uname -m) && \
-  wget -qO- "https://dl-cdn.alpinelinux.org/alpine/latest-stable/main/${ARCH}/" | \
-  grep -o 'href="apk-tools-static-[^"]*\.apk"' | head -1 | cut -d'"' -f2 | \
-  xargs -I {} wget -q "https://dl-cdn.alpinelinux.org/alpine/latest-stable/main/${ARCH}/{}" && \
-  tar -xzf apk-tools-static-*.apk && \
-  ./sbin/apk.static -X https://dl-cdn.alpinelinux.org/alpine/latest-stable/main \
-      -U --allow-untrusted add apk-tools && \
-  rm -rf sbin apk-tools-static-*.apk && \
-  apk --no-cache add ffmpeg sed
-
 # --- PATCH: force YouTube resumable upload content-type to video/mp4 ---
 RUN set -eux; \
   FILE="$(find /usr/local/lib/node_modules -type f -name 'YouTube.node.js' | head -n 1)"; \
