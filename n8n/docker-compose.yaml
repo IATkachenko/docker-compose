@@ -22,9 +22,9 @@ services:
     networks:
       - n8n_net
   n8n:
-    build: n8n
-    image: n8n-ffmpeg-patched_youtube
-    # image: rxchi1d/n8n-ffmpeg
+    # build: n8n
+    # image: n8n-ffmpeg-patched_youtube
+    image: rxchi1d/n8n-ffmpeg
     restart: unless-stopped
     container_name: n8n
     depends_on:
