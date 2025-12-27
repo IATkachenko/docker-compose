@@ -27,7 +27,7 @@ RUN set -eux; \
   fi; \
   \
   # Patch ONLY the value part to 'video/mp4' (keep formatting as much as possible)
-  cp "$FILE{,.bak}" && sed -i -E "s/('X-Upload-Content-Type':[[:space:]]*)[^,}]+/\\1'video\\/mp4'/" "$FILE"; \
+  cp "$FILE" "${FILE}.bak" && sed -i -E "s/('X-Upload-Content-Type':[[:space:]]*)[^,}]+/\\1'video\\/mp4'/" "$FILE"; \
   \
   # Verify patch applied
   if ! grep -q "'X-Upload-Content-Type': 'video/mp4'" "$FILE"; then \
