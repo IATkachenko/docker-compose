@@ -39,3 +39,4 @@ RUN set -eux; \
   echo "Patch OK"; \
   grep -n "X-Upload-Content-Type" "$FILE"
 # --- /PATCH ---
+USER node
