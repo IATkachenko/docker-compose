@@ -15,7 +15,7 @@ services:
       - n8n_net
       - nginx-proxy  
   mongodb-atlas:
-    image: mongodb/mongodb-atlas-local 
+    image: mongodb/mongodb-atlas-local:8.0.9
     restart: unless-stopped
     container_name: mongodb-atlas
     user: root
