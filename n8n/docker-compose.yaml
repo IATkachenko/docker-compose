@@ -5,6 +5,15 @@ networks:
     external: true
 
 services:
+  wan_api:
+    image: silvar/wan_api_admin:latest
+    restart: unless-stopped
+    container_name: wan-api
+    volumes:
+      - /home/ai/wan/output:/output
+    networks:
+      - n8n_net
+      - nginx-proxy  
   mongodb-atlas:
     image: mongodb/mongodb-atlas-local 
     restart: unless-stopped
